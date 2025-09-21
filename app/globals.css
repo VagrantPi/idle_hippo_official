@@ -137,6 +137,13 @@
   }
 }
 
+@layer components {
+  /* Style links inside translated privacy content */
+  .privacy-content a {
+    @apply underline text-blue-600 hover:text-blue-700;
+  }
+}
+
 /* Custom gaming animations */
 @keyframes float {
   0%,

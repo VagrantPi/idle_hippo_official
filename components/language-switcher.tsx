@@ -54,7 +54,7 @@ export function LanguageSwitcher({ currentLanguage, onLanguageChange, mounted = 
         {Object.entries(languageNames).map(([code, name]) => (
           <DropdownMenuItem
             key={code}
-            onClick={() => handleLanguageChange(code as Language)}
+            onSelect={() => handleLanguageChange(code as Language)}
             className="gap-2 cursor-pointer"
           >
             <span>{languageFlags[code as Language]}</span>

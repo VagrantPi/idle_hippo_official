@@ -44,7 +44,11 @@ export default function PrivacyPage() {
         <Card className="border-2">
           <CardContent className="p-8">
             <div className="text-muted-foreground leading-relaxed text-pretty space-y-6">
-              <div className="text-sm md:text-base whitespace-pre-line">{t.privacy.content}</div>
+              <div
+                className="privacy-content text-sm md:text-base"
+                // Translations are local/static; safe to render as HTML
+                dangerouslySetInnerHTML={{ __html: t.privacy.content.replace(/\n/g, '<br />') }}
+              />
             </div>
           </CardContent>
         </Card>

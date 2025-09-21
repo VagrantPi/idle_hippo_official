@@ -8,19 +8,25 @@ export function useLanguage() {
   const [language, setLanguage] = useState<Language>("en")
 
   useEffect(() => {
-    setMounted(true)
     // Get saved language from localStorage or detect from browser
-    const savedLang = localStorage.getItem("language") as Language
+    const savedLang = localStorage.getItem("language") as Language | null
     const detectedLang = detectLanguage()
-    const initialLang = savedLang || detectedLang
+    const initialLang = (savedLang || detectedLang) as Language
 
     setLanguage(initialLang)
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = initialLang
+    }
+    setMounted(true)
   }, [])
 
   const changeLanguage = (newLang: Language) => {
     console.log("[v0] Changing language to:", newLang) // Debug log
     setLanguage(newLang)
     localStorage.setItem("language", newLang)
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = newLang
+    }
     window.dispatchEvent(new CustomEvent("languageChanged", { detail: newLang }))
   }
 
